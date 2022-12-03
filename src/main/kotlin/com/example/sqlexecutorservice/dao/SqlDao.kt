@@ -11,7 +11,7 @@ class SqlDao(
     val jdbcTemplate: JdbcTemplate
 ) {
     @Transactional(readOnly = true)
-    fun sqlExecute(sql: String): List<Any> {
+    fun selectExecute(sql: String): List<Any> {
         return jdbcTemplate.queryForList(sql)
     }
 }
