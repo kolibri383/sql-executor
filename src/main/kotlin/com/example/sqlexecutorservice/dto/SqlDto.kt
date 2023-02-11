@@ -1,3 +1,3 @@
 package com.example.sqlexecutorservice.dto
 
-data class SqlDto (val query: String)
+data class SqlDto(val query: String? = null)

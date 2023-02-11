@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.context.request.ServletWebRequest
 import java.sql.SQLException
-import java.time.LocalDateTime
 
 
 @RestControllerAdvice
@@ -19,9 +18,9 @@ class SqlExecutorHandler {
         val error = ApiError().apply {
             message = ex.message
             status = HttpStatus.BAD_REQUEST
-            timestamp = LocalDateTime.now()
+            //timestamp = LocalDateTime.now()
             this.path = path
         }
-        return ResponseEntity(error,HttpStatus.BAD_REQUEST)
+        return ResponseEntity(error, HttpStatus.BAD_REQUEST)
     }
 }
