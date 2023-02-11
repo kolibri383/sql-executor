@@ -5,3 +5,13 @@ spring:
     url: ${url}
     user: ${user}
     password: ${password}
+  kafka:
+    bootstrap-servers: ${url}
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+server:
+  port: 8779
+
+
