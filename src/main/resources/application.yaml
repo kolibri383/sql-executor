@@ -1,16 +1,52 @@
 
 spring:
   flyway:
-    driver-class-name: ${driver}
-    url: ${url}
-    user: ${user}
-    password: ${password}
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:8000/wh_new
+    user: admin
+    password: admin
   kafka:
-    bootstrap-servers: ${url}
+    bootstrap-servers: localhost:9092
     producer:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     consumer:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+  datasource:
+    dbcp2:
+      test-while-idle: true
+      validation-query: select 1
+      time-between-eviction-runs-millis: 3600000
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: http://localhost/realms/sql-trainer
+#          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+#
+#
+#jwt:
+#  auth:
+#    converter:
+#      resource-id: sql-executor
+#      principal-attribute: preferred_username
+
+  security:
+    oauth2:
+      client:
+        registration:
+          oauth2-sql-executor:
+            client-id: sql-executor
+            client-secret: JL7ALoA4PSZEu7itNxpFamm4cAqxj7QN
+            scope: openid, profile, roles
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8779/login/oauth2/code/sql-executor
+        provider:
+          oauth2-sql-executor:
+            issuer-uri: http://localhost/realms/sql-trainer
+            user-name-attribute: preferred_username
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost/realms/sql-trainer
 server:
   port: 8779
 

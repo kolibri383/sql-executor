@@ -1,12 +1,14 @@
 package com.example.sqlexecutorservice.dto
 
+import com.example.testsqlexecuter.dto.Status
 
 
 data  class ExecutorAnswerDto (
-    var userName: String? = null,
-    var categoryId: Long? =null,
-    var taskId: Long? = null,
+    var username: String? = null,
+    var moduleId: Int? =null,
+    var taskId: Int? = null,
     var userSql: String? = null,
-    var resultStatus: String? = null,
+    var database: String? = null,
+    var resultStatus: Status? = null,
     var messageException: String = ""
 )

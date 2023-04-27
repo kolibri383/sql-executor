@@ -14,12 +14,10 @@ class SqlExecutorHandler {
 
     @ExceptionHandler(*[SQLException::class])
     fun <T : SQLException> handlerNotFoundException(ex: T, request: ServletWebRequest): ResponseEntity<Any?>? {
-        val path = request.request.requestURI
         val error = ApiError().apply {
             message = ex.message
             status = HttpStatus.BAD_REQUEST
-            //timestamp = LocalDateTime.now()
-            this.path = path
+            this.path = request.request.requestURI
         }
         return ResponseEntity(error, HttpStatus.BAD_REQUEST)
     }

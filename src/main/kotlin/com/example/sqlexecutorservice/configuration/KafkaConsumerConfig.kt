@@ -1,7 +1,7 @@
 package com.example.sqlexecutorservice.configuration
 
-import com.example.sqlexecutorservice.dto.SqlTaskAnswerDto
-import com.example.sqlexecutorservice.serializer.SqlTaskAnswerDtoDeserializer
+import com.example.sqlexecutorservice.dto.EventValidationTaskDto
+import com.example.sqlexecutorservice.serializer.EventValidationTaskDtoDeserializer
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.springframework.beans.factory.annotation.Value
@@ -25,19 +25,19 @@ class KafkaConsumerConfig {
         val props = HashMap<String, Any>().apply {
             put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServers!!)
             put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer::class.java)
-            put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, SqlTaskAnswerDtoDeserializer::class.java)
+            put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, EventValidationTaskDtoDeserializer::class.java)
         }
         return props
     }
 
     @Bean
-    fun consumerFactory(): ConsumerFactory<String, SqlTaskAnswerDto> =
+    fun consumerFactory(): ConsumerFactory<String, EventValidationTaskDto> =
         DefaultKafkaConsumerFactory(consumerConfig())
 
     @Bean
-    fun factory(consumerFactory: ConsumerFactory<String, SqlTaskAnswerDto>):
-            KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, SqlTaskAnswerDto>> {
-        val factory = ConcurrentKafkaListenerContainerFactory<String, SqlTaskAnswerDto>().apply {
+    fun factory(consumerFactory: ConsumerFactory<String, EventValidationTaskDto>):
+            KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, EventValidationTaskDto>> {
+        val factory = ConcurrentKafkaListenerContainerFactory<String, EventValidationTaskDto>().apply {
             this.consumerFactory = consumerFactory
         }
         return factory

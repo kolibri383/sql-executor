@@ -12,7 +12,7 @@ class KafkaTopicConfig {
 
     @Bean
     fun sqlResponseTopic(): NewTopic {
-        return TopicBuilder.name("sql-result")
+        return TopicBuilder.name("sql-check-result")
             .build()
     }
 }
