@@ -3,7 +3,7 @@ package com.example.sqlexecutorservice.service
 import com.example.sqlexecutorservice.dao.SqlDao
 import com.example.sqlexecutorservice.dto.EventValidationTaskDto
 import com.example.sqlexecutorservice.dto.ExecutorAnswerDto
-import com.example.testsqlexecuter.dto.Status
+import com.example.sqlexecutorservice.dto.Status
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.kafka.annotation.KafkaListener
@@ -24,6 +24,7 @@ class KafkaListeners(
         checkSql(
             ExecutorAnswerDto(
                 username = task.username,
+                fullName = task.fullName,
                 taskId = task.taskId,
                 moduleId = task.moduleId,
                 userSql = task.userSql,

@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class SqlExecuteService(
-        @Autowired
-        val sqlDao: SqlDao,
+    @Autowired
+    val sqlDao: SqlDao,
 ) {
     fun executeSelectQuery(sqlDto: SqlDto): List<Any> {
         return sqlDao.selectExecute(sqlDto.query!!)
