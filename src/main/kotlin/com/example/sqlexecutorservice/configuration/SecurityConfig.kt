@@ -27,16 +27,14 @@ internal class SecurityConfig(keycloakLogoutHandler: KeycloakLogoutHandler) {
     @Bean
     @Throws(Exception::class)
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
-        http.csrf().disable()
+        http.cors().and().csrf().disable()
             .authorizeHttpRequests()
-            .requestMatchers("/sql-executor/*")
-            .fullyAuthenticated()
+            .anyRequest().authenticated()
             .and()
             .oauth2Login()
             .and()
             .oauth2ResourceServer().jwt()
-        return http.build()
-    }
+        return http.build()}
 
 
 }
