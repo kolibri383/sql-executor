@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*
 import java.security.Principal
 
 @RestController
-@RequestMapping("/sql-executor/execute")
-@CrossOrigin(origins = ["http://localhost:3000"])
+@RequestMapping("api/sql-executor/execute")
+@CrossOrigin(origins = ["http://192.168.1.15:3000"])
 class SqlExecuteController(@Autowired val sqlExecuteService: SqlExecuteService) {
 
     @PostMapping
